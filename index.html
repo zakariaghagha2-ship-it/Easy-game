@@ -216,7 +216,6 @@
         let hoverCol = -1;
         let particles = [];
 
-        // إنشاء محرك الصوت بشكل آمن عند التفاعل الأول فقط
         let audioCtx = null;
 
         function playSound(type) {
@@ -262,7 +261,6 @@
             }
         }
 
-        // إعداد مستوى الصعوبة
         function setupDiffBtns() {
             const btnEasy = document.getElementById('btn-easy');
             const btnMed = document.getElementById('btn-med');
@@ -280,7 +278,6 @@
         }
         setupDiffBtns();
 
-        // الذكاء الاصطناعي
         function isValidLocation(b, col) { return b[0][col] === EMPTY; }
 
         function getNextOpenRow(b, col) {
@@ -487,9 +484,14 @@
             draw();
         }
 
-        startBtn.onclick = function() {
+        startBtn.addEventListener('click', (e) => {
+            e.preventDefault();
             resetGame();
-        };
+        });
+        startBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            resetGame();
+        });
 
         function handleInput(clientX) {
             if (isGameOver || isAiThinking || !overlay.classList.contains('hidden')) return;
@@ -551,5 +553,4 @@
                             ctx.shadowColor = "#ff0055";
                         }
                         ctx.beginPath();
-                        ctx.arc(x, y, RADIUS - 4, 0, Math.PI * 2);
-                   
+                        ctx.arc(x, 
